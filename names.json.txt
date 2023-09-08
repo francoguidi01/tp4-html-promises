@@ -1,6 +1,0 @@
-[
-{first_name:"juan"},
-{first_name:"lucas"},
-{first_name:"pedro"}
-
-]
