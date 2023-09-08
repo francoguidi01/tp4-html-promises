@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TP 4 PROMISES</title>
+</head>
+
+<body>
+    <p>Paragraph with the data</p>
+
+    <script>
+        
+        function company_API(url, method) {
+            return new Promise((resolve, reject) => {
+                let request = new XMLHttpRequest();
+                request.open(method, url);
+                request.responseType = 'json';
+                request.onload = function () {
+                    if (request.status == 200) {
+                        resolve(request.response);
+                    } else {
+                        reject(Error('THERE WAS AN ERROR LOADING DATA ASJFDSAJFGJRG'));
+                    }
+                }
+                request.onerror = function () {
+                    reject(Error('THERE WAS AN INTERNET ERROR (I THINK)'));
+                }
+                request.send();
+            });
+        }
+
+    
+        company_API('names.json','GET')
+            .then((employees) => {
+                console.log(employees);
+
+                let paragraph = document.querySelector('p');
+                employees.forEach(employee => {
+                    paragraph.textContent += employee.first_name;
+                });
+            })
+            .catch((reason) => {
+                console.log(Error(reason));
+            })
+
+    </script>
+</body>
+
+</html>
